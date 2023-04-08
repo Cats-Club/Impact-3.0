@@ -1,0 +1,9 @@
+[
+  {
+    "modid": "impact",
+    "name": "Impact Client",
+    "description": "A port of 1.10.2 MCP Impact 3.0 to 1.12.2 Forge",
+    "version": "3.0",
+    "mcversion": "1.12.2"
+  }
+]
