@@ -1,17 +1,10 @@
 package me.zero.clarinet.mod.movement;
 
+import me.zero.clarinet.mod.movement.speed.*;
 import org.lwjgl.input.Keyboard;
 
 import me.zero.clarinet.mod.Category;
 import me.zero.clarinet.mod.Mod;
-import me.zero.clarinet.mod.movement.speed.SpeedAAC;
-import me.zero.clarinet.mod.movement.speed.SpeedBhop;
-import me.zero.clarinet.mod.movement.speed.SpeedFloat;
-import me.zero.clarinet.mod.movement.speed.SpeedBoost;
-import me.zero.clarinet.mod.movement.speed.SpeedLowHop;
-import me.zero.clarinet.mod.movement.speed.SpeedVanilla;
-import me.zero.clarinet.mod.movement.speed.SpeedVhop;
-import me.zero.clarinet.mod.movement.speed.SpeedYPort;
 import me.zero.values.types.BooleanValue;
 import me.zero.values.types.NumberValue;
 
@@ -29,6 +22,7 @@ public class Speed extends Mod {
                 new SpeedVhop(this),
                 new SpeedYPort(this),
                 new SpeedLowHop(this),
+				new SpeedStrafe(this),
                 new SpeedVanilla(this),
                 new SpeedAAC(this),
                 new SpeedBoost(this),

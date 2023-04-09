@@ -49,6 +49,7 @@ public class Impact {
 	private FriendManager friendManager;
 	private XrayManager xrayManager;
 	private MacroManager macroManager;
+	private NameprotectManager nameprotectManager;
 	private NukerManager nukerManager;
 	private WaypointManager waypointManager;
     private PluginManager pluginManager;
@@ -101,6 +102,9 @@ public class Impact {
 
 		nukerManager = new NukerManager();
 		nukerManager.load();
+
+		nameprotectManager = new NameprotectManager();
+		nameprotectManager.load();
 
 		tabgui = new TabGui();
 
@@ -176,7 +180,11 @@ public class Impact {
 	public MacroManager getMacroManager() {
 		return this.macroManager;
 	}
-	
+
+	public NameprotectManager getNameprotectManager() {
+		return nameprotectManager;
+	}
+
 	public NukerManager getNukerManager() {
 		return this.nukerManager;
 	}

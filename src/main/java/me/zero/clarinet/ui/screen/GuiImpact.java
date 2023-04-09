@@ -46,7 +46,6 @@ public class GuiImpact extends GuiScreen {
 		this.buttonList.add(macro);
 		
 		GuiButton nameprotect = new GuiButton(5, this.width / 2 - 100, var3 - 24, 98, 20, "NameProtect");
-		nameprotect.enabled = false;
 		this.buttonList.add(nameprotect);
 		
 		GuiButton alt = new GuiButton(6, this.width / 2 - 100 + 102, var3 - 24, 98, 20, "Alts");
@@ -80,7 +79,7 @@ public class GuiImpact extends GuiScreen {
 		} else if (button.id == 4) {
 			mc.displayGuiScreen(new GuiMacro(this));
 		} else if (button.id == 5) {
-			// mc.displayGuiScreen(new ImpactGuiNameprotect(this));
+			mc.displayGuiScreen(new ImpactGuiNameprotect(this));
 		} else if (button.id == 6) {
 			mc.displayGuiScreen(new GuiAltList(this));
 		} else if (button.id == 8) {
