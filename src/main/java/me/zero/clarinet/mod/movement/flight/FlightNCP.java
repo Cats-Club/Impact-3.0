@@ -22,14 +22,14 @@ public class FlightNCP extends ModMode<Flight> {
 		if (mc.gameSettings.keyBindForward.isKeyDown()) {
 			double mx = Math.cos(Math.toRadians(mc.player.rotationYaw - 90));
 			double mz = Math.sin(Math.toRadians(mc.player.rotationYaw - 90));
-			double speed = 0.026D;
+			double speed = 0.0624D;
 			double x1 = -(speed * mx - 0.0D * mz);
 			double z1 = -(speed * mz - 0.0D * mx);
 			mc.player.motionX = x1;
 			mc.player.motionZ = z1;
 		}
 		mc.player.motionY = 0.0;
-		mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX + mc.player.motionX * 11, mc.player.posY + (0.0625 * (mc.player.movementInput.jump ? 1 : mc.player.movementInput.sneak ? -1 : 0)), mc.player.posZ + mc.player.motionZ * 11, false));
+		mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX + mc.player.motionX, mc.player.posY + (0.0625 * (mc.player.movementInput.jump ? 1 : mc.player.movementInput.sneak ? -1 : 0)), mc.player.posZ + mc.player.motionZ, false));
 		ClientUtils.breakNCP();
 	}
 	

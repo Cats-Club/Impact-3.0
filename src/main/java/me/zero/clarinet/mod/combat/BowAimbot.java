@@ -2,6 +2,9 @@ package me.zero.clarinet.mod.combat;
 
 import java.util.ArrayList;
 
+import it.unimi.dsi.fastutil.booleans.BooleanSet;
+import me.zero.clarinet.event.player.EventMotionUpdate;
+import net.minecraft.util.math.Vec2f;
 import org.lwjgl.input.Keyboard;
 
 import me.zero.clarinet.event.api.EventTarget;
@@ -40,6 +43,11 @@ public class BowAimbot extends Mod {
 	private BooleanValue animals = new BooleanValue(this, "Animals", "animals", true);
 	
 	public NumberValue fov = new NumberValue(this, "FOV", "fov", 360D, 45D, 360D, 1D);
+
+	private BooleanValue silent = new BooleanValue(this, "Silent", "silent", false);
+
+	private static final Vec2f NULL_ROT = new Vec2f(-999, -999);
+	private Vec2f silentRot = NULL_ROT;
 	
 	public BowAimbot() {
 		super("BowAimbot", "Aims at the specified targets with a bow", Keyboard.KEY_NONE, Category.COMBAT);
@@ -75,8 +83,11 @@ public class BowAimbot extends Mod {
 			if (velocity < 0.1) {
 				if (currentTarget instanceof EntityLivingBase) {
 					float[] angles = RotationUtils.getRotations(currentTarget);
-					mc.player.rotationYaw = angles[0];
-					mc.player.rotationPitch = angles[1];
+					if (!silent.getValue()) {
+						mc.player.rotationYaw = angles[0];
+						mc.player.rotationPitch = angles[1];
+					} else
+						silentRot = new Vec2f(angles[1], angles[0]);
 				}
 				return;
 			}
@@ -94,8 +105,20 @@ public class BowAimbot extends Mod {
 			float g = 0.006F;
 			float tmp = (float) (velocity * velocity * velocity * velocity - g * (g * (y2 * y2) + 2 * posY * (velocity * velocity)));
 			float pitch = (float) -Math.toDegrees(Math.atan((velocity * velocity - Math.sqrt(tmp)) / (g * y2)));
-			mc.player.rotationYaw = yaw;
-			mc.player.rotationPitch = pitch;
+			if (!silent.getValue()) {
+				mc.player.rotationYaw = yaw;
+				mc.player.rotationPitch = pitch;
+			} else
+				silentRot = new Vec2f(pitch, yaw);
+		}
+	}
+
+	@EventTarget
+	public void onMotionUpdate(EventMotionUpdate event) {
+		if (silent.getValue() && silentRot.x != NULL_ROT.x && silentRot.y != NULL_ROT.y) {
+			event.pitch = silentRot.x;
+			event.yaw = silentRot.y;
+			silentRot = NULL_ROT;
 		}
 	}
 	

@@ -3,6 +3,7 @@ package me.zero.clarinet.ui.screen.override.screen;
 import java.io.IOException;
 
 import me.zero.clarinet.mixin.mixins.minecraft.client.gui.inventory.IGuiChest;
+import net.minecraft.init.Items;
 import org.lwjgl.input.Keyboard;
 
 import me.zero.clarinet.Impact;
@@ -46,25 +47,22 @@ public class OverrideGuiChest extends GuiChest {
 	
 	protected void actionPerformed(GuiButton button) {
 		if (button.id == 0) {
-			new Thread() {
-				@Override
-				public void run() {
-					try {
-						for (int i = 0; i < ((IGuiChest) OverrideGuiChest.this).getInventoryRows() * 9; i++) {
-							Slot slot = (Slot) OverrideGuiChest.this.inventorySlots.inventorySlots.get(i);
-							if (slot.getStack() != null) {
-								if (Impact.getInstance().getModManager().get(AutoSteal.class).getDelay() > 0) {
-									Thread.sleep(Impact.getInstance().getModManager().get(AutoSteal.class).getDelay());
-								}
-								OverrideGuiChest.this.handleMouseClick(slot, slot.slotNumber, 0, ClickType.QUICK_MOVE);
-								OverrideGuiChest.this.handleMouseClick(slot, slot.slotNumber, 0, ClickType.PICKUP_ALL);
+			new Thread(() -> {
+				try {
+					for (int i = 0; i < ((IGuiChest) OverrideGuiChest.this).getInventoryRows() * 9; i++) {
+						Slot slot = OverrideGuiChest.this.inventorySlots.inventorySlots.get(i);
+						if (!slot.getStack().getItem().equals(Items.AIR)) { // Doogie13 - 1.10.2 -> 1.12.2
+							if (Impact.getInstance().getModManager().get(AutoSteal.class).getDelay() > 0) {
+								Thread.sleep(Impact.getInstance().getModManager().get(AutoSteal.class).getDelay());
 							}
+							OverrideGuiChest.this.handleMouseClick(slot, slot.slotNumber, 0, ClickType.QUICK_MOVE);
+							OverrideGuiChest.this.handleMouseClick(slot, slot.slotNumber, 0, ClickType.PICKUP_ALL);
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}.start();
+			}).start();
 		}
 	}
 }

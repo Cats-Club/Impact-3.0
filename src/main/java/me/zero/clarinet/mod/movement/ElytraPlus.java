@@ -39,7 +39,7 @@ public class ElytraPlus extends Mod {
 	@EventTarget
 	public void onUpdate(EventUpdate event) {
 		ItemStack chest = mc.player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		if (chest == null || chest.getItem() != Items.ELYTRA) {
+		if (chest.getItem() != Items.ELYTRA) {
 			return;
 		}
 		if (mc.player.isElytraFlying()) {

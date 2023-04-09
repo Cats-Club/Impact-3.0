@@ -23,7 +23,7 @@ public final class ClientUtils implements Helper {
 	public static final String prefix = "§f[§9Impact§f]§7";
 	
 	public static void breakNCP() {
-        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX + mc.player.motionX, 13370000001E9, mc.player.posZ + mc.player.motionZ, true));
+        mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX + mc.player.motionX, /*13370000001E9*/ mc.player.posY - 1337, mc.player.posZ + mc.player.motionZ, true));
 	}
 
 	public static void swap(int slot, int hotbar) {

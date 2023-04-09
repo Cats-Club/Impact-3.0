@@ -37,8 +37,9 @@ public class Aura extends Mod {
 	private AuraTick tickMode = new AuraTick(this);
 	private AuraMulti multiMode = new AuraMulti(this);
 	private AuraDelay delayMode = new AuraDelay(this);
+	private AuraCancer cancerMode = new AuraCancer(this);
 	
-	private MultiValue<String> mode = new MultiValue<>(this, "Mode", "mode", "Delay", new String[] { "Single", "Switch", "Tick", "Multi", "Delay" });
+	private MultiValue<String> mode = new MultiValue<>(this, "Mode", "mode", "Delay", new String[] { "Single", "Switch", "Tick", "Multi", "Delay", "Cancer" });
 	private MultiValue<String> priority = new MultiValue<>(this, "Priority", "priority", "Distance", new String[] { "Distance", "Health", "Smart" });
 
     private BooleanValue walls = new BooleanValue(this, "Walls", "walls");
@@ -139,7 +140,7 @@ public class Aura extends Mod {
 		} else if (mode.getValue().equalsIgnoreCase("Multi")) {
 			return multiMode;
 		} else {
-			return AuraMode.NULL;
+			return cancerMode;
 		}
 	}
 	

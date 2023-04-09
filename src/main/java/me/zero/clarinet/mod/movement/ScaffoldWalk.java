@@ -34,7 +34,7 @@ public class ScaffoldWalk extends Mod {
 	
 	public ScaffoldWalk() {
 		super("ScaffoldWalk", "Places blocks under you", 0, Category.MOVEMENT);
-		this.blacklist = Arrays.asList(new Block[] { Blocks.AIR, Blocks.WATER, Blocks.FLOWING_WATER, Blocks.LAVA, Blocks.FLOWING_LAVA });
+		this.blacklist = Arrays.asList(Blocks.AIR, Blocks.WATER, Blocks.FLOWING_WATER, Blocks.LAVA, Blocks.FLOWING_LAVA);
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public class ScaffoldWalk extends Mod {
 				keyDown = Keyboard.isKeyDown(mc.gameSettings.keyBindJump.getKeyCode());
 			}
 			if ((keyDown) && (mc.inGameHasFocus) && (mc.player.onGround)) {
-				mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0.0D, 1.2D, 0.0D));
+				//mc.player.setEntityBoundingBox(mc.player.getEntityBoundingBox().offset(0.0D, 1.2D, 0.0D));
 			}
 		} else {
 			int block = findBlocks(36, 45);
