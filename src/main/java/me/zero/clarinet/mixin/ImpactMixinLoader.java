@@ -1,6 +1,7 @@
 package me.zero.clarinet.mixin;
 
 import me.zero.clarinet.Impact;
+import me.zero.clarinet.manager.manager.DiscordRPCManager;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -20,6 +21,7 @@ public class ImpactMixinLoader implements IFMLLoadingPlugin {
 
     public ImpactMixinLoader() {
 
+        DiscordRPCManager.INSTANCE.init();
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.impact.json");
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext("searge");
