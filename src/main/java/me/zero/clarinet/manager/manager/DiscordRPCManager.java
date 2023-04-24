@@ -28,7 +28,7 @@ public enum DiscordRPCManager {
             public void onReady(IPCClient client, User user) {
                 client.sendRichPresence(
                         new RichPresence.Builder()
-                                .setState("Impact Utility Mod")
+                                .setState("https://github.com/Cats-Club/Impact-3.0")
                                 .setStartTimestamp(OffsetDateTime.now())
                                 .setLargeImage("impact", "Impact Utility Mod")
                                 .build()
